@@ -14,7 +14,6 @@
 vector<string> sortPeople(vector<string> &names, vector<int> &heights)
 {
     int n = heights.size();
-    vector<string> ans;
     vector<pair<int, string>> data(n);
     for (int i = 0; i < n; i++)
     {
@@ -24,7 +23,7 @@ vector<string> sortPeople(vector<string> &names, vector<int> &heights)
     reverse(data.begin(), data.end());
     for (int i = 0; i < n; i++)
     {
-        ans.push_back(data[i].second);
+        names[i] = data[i].second;
     }
-    return ans;
+    return names;
 }
