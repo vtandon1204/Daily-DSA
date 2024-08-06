@@ -1,9 +1,9 @@
 #include <bits/stdc++.h>
 // You are given a string word containing lowercase English letters.
-// Telephone keypads have keys mapped with distinct collections of lowercase English letters, which can be used to form words by pushing them. 
-// For example, the key 2 is mapped with ["a","b","c"], we need to push the key one time to type "a", two times to type "b", 
-// and three times to type "c" . It is allowed to remap the keys numbered 2 to 9 to distinct collections of letters. 
-// The keys can be remapped to any amount of letters, but each letter must be mapped to exactly one key. You need to find the minimum number of 
+// Telephone keypads have keys mapped with distinct collections of lowercase English letters, which can be used to form words by pushing them.
+// For example, the key 2 is mapped with ["a","b","c"], we need to push the key one time to type "a", two times to type "b",
+// and three times to type "c" . It is allowed to remap the keys numbered 2 to 9 to distinct collections of letters.
+// The keys can be remapped to any amount of letters, but each letter must be mapped to exactly one key. You need to find the minimum number of
 // times the keys will be pushed to type the string word.
 // Return the minimum number of pushes needed to type word after remapping the keys.
 // An example mapping of letters to keys on a telephone keypad is given below. Note that 1, *, #, and 0 do not map to any letters.
@@ -69,25 +69,32 @@ int minimumPushes(string word)
     // }
     // return push;
     // ***********************************************************
-    vector<int> cnt(26);
+    vector<int> freq(26);
+
     for (char &c : word)
     {
-        ++cnt[c - 'a'];
+        ++freq[c - 'a'];
     }
-    // for(int i = 0;i<cnt.size();i++){
-    //     cout<<cnt[i]<<" ";
-    // }
-    // cout<<endl;
-    sort(cnt.rbegin(), cnt.rend());
-    // for(int i = 0;i<cnt.size();i++){
-    //     cout<<cnt[i]<<" ";
-    // }
-    int ans = 0;
+    for (int i = 0; i < freq.size(); i++)
+    {
+        cout << freq[i] << " ";
+    }
+    cout << endl;
+    sort(freq.rbegin(), freq.rend());
+    for (int i = 0; i < freq.size(); i++)
+    {
+        cout << freq[i] << " ";
+    }
+    int push = 0;
     for (int i = 0; i < 26; ++i)
     {
-        ans += (i / 8 + 1) * cnt[i];
+        push += (i / 8 + 1) * freq[i];
+        if (freq[i] == 0)
+        {
+            break;
+        }
     }
-    return ans;
+    return push;
     // ***********************************************************
     // map<int, vector<char>> keypad;
     // set<char> uniqueChars(word.begin(), word.end());
