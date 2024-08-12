@@ -11,26 +11,23 @@
 // [null, 4, 5, 5, 8, 8]
 // Explanation
 // KthLargest kthLargest = new KthLargest(3, [4, 5, 8, 2]);
-kthLargest.add(3);   // return 4
-kthLargest.add(5);   // return 5
-kthLargest.add(10);  // return 5
-kthLargest.add(9);   // return 8
-kthLargest.add(4);   // return 8
-class KthLargest
-{
-    int number;
+// kthLargest.add(3);   // return 4
+// kthLargest.add(5);   // return 5
+// kthLargest.add(10);  // return 5
+// kthLargest.add(9);   // return 8
+// kthLargest.add(4);   // return 8
+class class KthLargest {
+    int number = 0;
     priority_queue<int, vector<int>, greater<int>> p;
 
 public:
-    KthLargest(int k, vector<int> &nums)
-    {
+    KthLargest(int k, vector<int>& nums) {
         number = k;
-        for (int i = 0; i < nums.size(); i++)
-        {
-            p.push(nums[i]);
-            if (p.size() > k)
-            {
+        for (int i = 0; i < nums.size(); i++) {
+            if(p.size()<k) p.push(nums[i]);
+            else if(p.top()<nums[i]){
                 p.pop();
+                p.push(nums[i]);
             }
         }
         // for(int i=0;i<p.size();i++){
@@ -40,18 +37,21 @@ public:
         // cout<<endl;
     }
 
-    int add(int val)
-    {
-        p.push(val);
+    int add(int val) {
+        if (p.size() < number) {
+            p.push(val);
+        } else if (p.top() < val) {
+            p.pop();
+            p.push(val);
+        }
         // for(int i=0;i<p.size();i++){
         //     cout<<p.top()<<" ";
         //     p.pop();
         // }
         // cout<<endl;
-        if (p.size() > number)
-        {
-            p.pop();
-        }
+        // if(p.size()>number){
+        //     p.pop();
+        // }
         return p.top();
     }
 };
